@@ -1,0 +1,15 @@
+---
+#install varaiables
+binary_path: "/home/tomcat/AppDynamics/AppServerAgent"
+zip_file: "AppServerAgent-4.5.12.27094.zip"
+controller_xml: "controller-info.xml"
+
+#config template variables
+controller_host: "controllerx-paulmateos-nwmg6cq2.srv.ravcloud.com"
+controller_port: "8090"
+ssl_enabled: "false"
+app_name: "AppName"
+tier_name: "Tier1"
+node_name: "Node1"
+account_name: "customer1"
+access_key: "406d2fe8-3ded-4944-9152-a8f5ff224265"

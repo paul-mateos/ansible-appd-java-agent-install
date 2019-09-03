@@ -2,11 +2,9 @@
 - name: Provision Agents on linux
   hosts: linuxserver
   gather_facts: yes
-  #su: yes
-  #su_user: root
   roles:
-     - install-tomcat-appagent
-    # - install-java-appagent
+    # - install-tomcat-appagent
+     - install-java-appagent
     # - install-java-machineagent
     # - install-java-analyticsagent
    
