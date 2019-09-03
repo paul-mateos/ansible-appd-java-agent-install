@@ -1,7 +1,8 @@
 ---
 #install varaiables
-zip_file: "machineagent-bundle-64bit-windows-4.5.14.2293.zip"
-install_path: "C:\\AppDynamics\\MachineAgent"
+binary_path: "/opt/appdynamics/machine-agent"
+zip_file: "machineagent-bundle-64bit-linux-4.5.13.2238.zip"
+machineagent_systemd: "appdynamics-machine-agent"
 
 #config template variables
 controller_host: "controllerx-paulmateos-nwmg6cq2.srv.ravcloud.com"

@@ -5,6 +5,6 @@
   roles:
     # - install-tomcat-appagent
     # - install-java-appagent
-     - install-java-machineagent
-    # - install-java-analyticsagent
+    # - install-java-machineagent
+     - install-java-analyticsagent
    
