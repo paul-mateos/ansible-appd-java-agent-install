@@ -1,0 +1,28 @@
+---
+- include_vars: dotnet-agent-vars.yml
+
+- name: create tmp directory
+  win_file:
+    path: "{{ msi_path }}"
+    state: directory
+
+- name: Template config file to tmp
+  win_template:
+    src: "{{ setup_file }}.j2"
+    dest: "{{ msi_path }}\\{{ setup_file }}"
+
+- name: Install .Net Agent
+  win_package:
+    path: "C:\\tmp\\{{ msi_file }}"
+    arguements: 
+    - /q 
+    - /norestart 
+    - -s "{{ msi_path }}\\{{ setup_file }}"
+    register: result
+    state: present
+
+- name: Start Agent
+  win_service:
+    name: AppDynamics.Agent.Coordinator
+    state: started
+    when: result is succeeded

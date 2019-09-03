@@ -1,0 +1,14 @@
+---
+#install varaiables
+zip_file: "machineagent-bundle-64bit-windows-4.5.14.2293.zip"
+controller_xml: "controller-info.xml"
+install_path: "C:\\AppDynamics\\MachineAgent"
+
+#config template variables
+controller_host: "controllerx-paulmateos-nwmg6cq2.srv.ravcloud.com"
+controller_port: "8090"
+ssl_enabled: "false"
+account_name: "customer1"
+sim_enabled: "true"
+access_key: "406d2fe8-3ded-4944-9152-a8f5ff224265"
+dotnet_compatibility_mode: "true"

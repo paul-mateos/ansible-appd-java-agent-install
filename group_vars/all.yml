@@ -1,0 +1,5 @@
+ansible_user: tomcat
+ansible_password: password
+ansible_port: 22
+ansible_connection: paramiko
+ansible_become_pass: password

@@ -1,0 +1,31 @@
+<winston>
+  <logFileDirectory directory="{{ logFileDirectory }}" />
+  <logFileFolderAccessPermissions defaultAccountsEnabled="true">
+    <account name="NT AUTHORITY\LOCAL SERVICE" displayName="LOCAL SERVICE" />
+    <account name="NT AUTHORITY\SYSTEM" displayName="SYSTEM" />
+    <account name="NT AUTHORITY\NETWORK SERVICE" displayName="NETWORK SERVICE" />
+    <account name="IIS_IUSRS" displayName="ApplicationPool Identity" />
+  </logFileFolderAccessPermissions>
+  <appdynamics-agent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <controller host="{{ controller_host}}" port="{{ controller_port}}" ssl="{{ ssl_enabled }}" enable_tls12="{{ tls12_enabled }}">
+    <application name="{{ app_name }}" />
+    <account name="{{ account_name }}" password="{{ access_key }}" />
+    <proxy host="{{ proxy_host }}" port="{{ proxy_port }}" />
+  </controller>
+    <machine-agent />
+    <app-agents>
+      <IIS>
+        <applications>
+          <application path="{{ iis_app_path }}" site="{{ iis_site }}">
+            <tier name="{{ tier_name }}" />
+          </application>
+        </applications>
+      </IIS>
+      <standalone-applications>
+         <standalone-application executable="{{ standalone_exe }}">
+            <tier name="{{ standalone_tier }}" />
+         </standalone-application>
+      </standalone-applications>
+    </app-agents>
+  </appdynamics-agent>
+</winston>

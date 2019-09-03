@@ -1,0 +1,20 @@
+---
+- include_vars: dotnet-analyticsagent-vars.yml
+
+- name: Unzip .Net Machine Agent
+  win_unzip:
+    src: "C:\\tmp\\{{ zip_file }}"
+    dest: "{{ install_path }}"
+    creates: "{{ install_path }}"
+
+- name: Template analytics properties file for install
+  win_template:
+    src: "{{ analytics_properties }}.j2"
+    dest: "{{ install_path }}\\monitors\\analytics-agent\\conf\\{{ analytics_properties }}"
+    register: result
+
+- name: Restart Machine Agent
+  win_service:
+    name: Appdynamics Machine Agent
+    state: restarted
+    when: result is succeeded

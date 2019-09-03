@@ -1,0 +1,30 @@
+---
+- include_vars: tomcat-agent-vars.yml
+
+- name: Create a directory if it does not exist
+  file:
+    path: "{{ binary_path }}"
+    state: directory
+    owner: tomcat
+    group: tomcat
+    mode: '0777'
+
+- name: tar extract app agent binaries
+  unarchive:
+    src: "/home/tomcat/{{ zip_file }}"
+    dest: "{{ binary_path }}"
+    remote_src: yes
+
+- name: Template config file to install folder
+  template:
+    src: "{{ set_config }}.j2"
+    dest: "{{ tomcat_bin }}/{{ set_config }}"
+    owner: tomcat
+    group: tomcat
+    mode: '0777'
+
+- name: Restart Tomcat Service
+  service: 
+    name: tomcat
+    state: restarted
+  become: yes

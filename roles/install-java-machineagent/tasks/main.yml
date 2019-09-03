@@ -1,0 +1,26 @@
+---
+- include_vars: dotnet-machineagent-vars.yml
+
+- name: Unzip .Net Machine Agent
+  win_unzip:
+    src: "C:\\tmp\\{{ zip_file }}"
+    dest: "{{ install_path }}"
+    creates: "{{ install_path }}"
+    register: result
+
+- name: Template controller config file for install
+  win_template:
+    src: "{{ controller_xml }}.j2"
+    dest: "{{ install_path }}\\conf\\{{ controller_xml }}"
+
+- name: Install Machine Agent as a service
+  win_shell: "cscript {{ install_path }}\\InstallService.vbs" 
+  args:
+    executable: cmd
+  register: service_install
+
+- name: Start Machine Agent
+  win_service:
+    name: Appdynamics Machine Agent
+    state: started
+    when: service_install is succeeded  

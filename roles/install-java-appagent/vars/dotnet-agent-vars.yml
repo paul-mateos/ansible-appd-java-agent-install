@@ -1,0 +1,22 @@
+---
+#install varaiables
+msi_path: "C:\\tmp\\AppDynamics"
+msi_file: "dotNetAgentSetup64-4.5.12.0.msi"
+setup_file: "setupconfig.xml"
+
+#config template variables
+logFileDirectory: "C:\\ProgramData\\AppDynamics\\DotNetAgent\\Logs"
+controller_host: "controllerx-paulmateos-nwmg6cq2.srv.ravcloud.com"
+controller_port: "8090"
+ssl_enabled: "false"
+tls12_enabled: "false"
+app_name: "exampleApp"
+account_name: "customer1"
+access_key: "406d2fe8-3ded-4944-9152-a8f5ff224265"
+proxy_host: "loadbalancernginxl-paulmateos-yzdx83g4.srv.ravcloud.com"
+proxy_port: "80"
+iis_app_path: "/"
+iis_site: "Default Web Site"
+tier_name: "Tier1"
+standalone_exe: "MyStandaloneApp.exe"
+standalone_tier: "Standalone App" 
