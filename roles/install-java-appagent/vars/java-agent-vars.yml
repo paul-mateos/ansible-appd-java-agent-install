@@ -1,6 +1,6 @@
 ---
 #install varaiables
-binary_path: "/home/tomcat/AppDynamics/AppServerAgent"
+binary_path: "/opt/appdynamics/app-agent"
 zip_file: "AppServerAgent-4.5.12.27094.zip"
 controller_xml: "controller-info.xml"
 

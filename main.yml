@@ -4,7 +4,7 @@
   gather_facts: yes
   roles:
     # - install-tomcat-appagent
-     - install-java-appagent
-    # - install-java-machineagent
+    # - install-java-appagent
+     - install-java-machineagent
     # - install-java-analyticsagent
    

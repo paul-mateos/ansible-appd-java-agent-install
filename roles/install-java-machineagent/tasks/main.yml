@@ -1,26 +1,42 @@
 ---
-- include_vars: dotnet-machineagent-vars.yml
+- include_vars: java-machineagent-vars.yml
 
-- name: Unzip .Net Machine Agent
-  win_unzip:
-    src: "C:\\tmp\\{{ zip_file }}"
-    dest: "{{ install_path }}"
-    creates: "{{ install_path }}"
-    register: result
+- name: Create a directory if it does not exist
+  file:
+    path: "{{ binary_path }}"
+    state: directory
+    owner: tomcat
+    group: tomcat
+    mode: '0777'
+  become: true
 
-- name: Template controller config file for install
-  win_template:
+- name: tar extract app agent binaries
+  unarchive:
+    src: "/home/tomcat/{{ zip_file }}"
+    dest: "{{ binary_path }}"
+    remote_src: yes
+
+- name: Template config file to install folder
+  template:
     src: "{{ controller_xml }}.j2"
-    dest: "{{ install_path }}\\conf\\{{ controller_xml }}"
+    dest: "{{ binary_path }}/conf/{{ controller_xml }}"
+    owner: tomcat
+    group: tomcat
+    mode: '0777'
 
-- name: Install Machine Agent as a service
-  win_shell: "cscript {{ install_path }}\\InstallService.vbs" 
-  args:
-    executable: cmd
-  register: service_install
+- name: Template service file to systemd folder
+  template:
+    src: "{{ machineagent_systemd }}.service.j2"
+    dest: "/etc/systemd/system/{{ machineagent_systemd }}.service"
+    owner: tomcat
+    group: tomcat
+    mode: '0777'
+  become: true  
 
-- name: Start Machine Agent
-  win_service:
-    name: Appdynamics Machine Agent
+- name: Enable and Start Machine Agent Service
+  service: 
+    name: "{{ machineagent_systemd }}"
+    enabled: true 
     state: started
-    when: service_install is succeeded  
+  become: yes    
+    
